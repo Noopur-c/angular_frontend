@@ -1,0 +1,19 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🔔 Notifications</h2>
+  
+    <div *ngIf="notifications.length > 0; else noNotifications">
+      <div *ngFor="let note of notifications" class="alert"
+           [ngClass]="{
+             'alert-success': note.status === 'approved',
+             'alert-danger': note.status === 'rejected'
+           }">
+        <strong>{{ note.status.toUpperCase() }}:</strong> {{ note.message }}<br>
+        <small class="text-muted">{{ note.time }}</small>
+      </div>
+    </div>
+  
+    <ng-template #noNotifications>
+      <div class="text-center text-muted">No notifications yet.</div>
+    </ng-template>
+  </div>
+  

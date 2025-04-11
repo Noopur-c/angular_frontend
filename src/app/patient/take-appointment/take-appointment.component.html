@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🗓️ Take Appointment</h2>
+  
+    <!-- Select Department -->
+    <div class="mb-4">
+      <label class="form-label"><strong>Select Department</strong></label>
+      <select [(ngModel)]="selectedDept" class="form-select">
+        <option value="" disabled selected>Select a department</option>
+        <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
+      </select>
+    </div>
+  
+    <!-- Select Doctor -->
+    <div *ngIf="selectedDept" class="mb-4">
+      <label class="form-label"><strong>Select Doctor</strong></label>
+      <select [(ngModel)]="selectedDoctor" class="form-select">
+        <option value="" disabled selected>Select a doctor</option>
+        <option *ngFor="let doc of doctors[selectedDept]" [ngValue]="doc">
+          {{ doc.name }}
+        </option>
+      </select>
+    </div>
+  
+    <!-- Doctor Profile -->
+    <div *ngIf="selectedDoctor" class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5>{{ selectedDoctor.name }}</h5>
+        <p><strong>Experience:</strong> {{ selectedDoctor.experience }}</p>
+        <p><strong>Specialization:</strong> {{ selectedDoctor.specialization }}</p>
+      </div>
+    </div>
+  
+    <!-- Select Slot -->
+    <div *ngIf="selectedDoctor" class="mb-4">
+      <label class="form-label"><strong>Select Slot</strong></label>
+      <select [(ngModel)]="selectedSlot" class="form-select">
+        <option value="" disabled selected>Select a slot</option>
+        <option *ngFor="let time of slots[selectedDoctor.id]">{{ time }}</option>
+      </select>
+    </div>
+  
+    <!-- Submit -->
+    <div *ngIf="selectedSlot">
+      <button class="btn btn-primary" (click)="handleSubmit()">📨 Request Appointment</button>
+    </div>
+  </div>
+  

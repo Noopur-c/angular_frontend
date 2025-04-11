@@ -1,0 +1,14 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🩺 Treatment History</h2>
+  
+    <div *ngFor="let item of treatments" class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.date }} — {{ item.doctor }}</h5>
+        <p class="card-text"><strong>Department:</strong> {{ item.department }}</p>
+        <p class="card-text"><strong>Diagnosis:</strong> {{ item.diagnosis }}</p>
+        <p class="card-text"><strong>Prescription:</strong> {{ item.prescription }}</p>
+        <p class="card-text"><strong>Doctor's Notes:</strong> {{ item.notes }}</p>
+      </div>
+    </div>
+  </div>
+  

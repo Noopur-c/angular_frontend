@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">💳 Bills History</h2>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover shadow">
+        <thead class="table-light">
+          <tr>
+            <th>Bill ID</th>
+            <th>Doctor</th>
+            <th>Department</th>
+            <th>Date</th>
+            <th>Amount (₹)</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of bills">
+            <td>{{ bill.id }}</td>
+            <td>{{ bill.doctor }}</td>
+            <td>{{ bill.department }}</td>
+            <td>{{ bill.date }}</td>
+            <td>{{ bill.amount }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-success': bill.status === 'Paid',
+                  'bg-danger': bill.status === 'Pending'
+                }"
+              >
+                {{ bill.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
