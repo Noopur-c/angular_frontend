@@ -1,25 +1,32 @@
-// app.routes.ts
 import { Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
 import { PatientHomeComponent } from './patient/home/home.component';
 import { CurrentAppointmentComponent } from './patient/current-appointment/current-appointment.component';
-import { BillsHistoryComponent } from './patient/bills-history/bills-history.component';
+import { BillHistoryComponent } from './patient/bill-history/bill-history.component';
 import { TreatmentHistoryComponent } from './patient/treatment-history/treatment-history.component';
 import { TakeAppointmentComponent } from './patient/take-appointment/take-appointment.component';
 import { NotificationsComponent } from './patient/notifications/notifications.component';
-import { BillHistoryComponent } from './patient/bill-history/bill-history.component';
-import { TreatmentsHistoryComponent } from './patient/treatments-history/treatments-history.component';
+import { FeedbackComponent } from './patient/feedback/feedback.component';
+import { DoctorHomeComponent } from './doctor/home/home.component';
+import { PendingAppointmentsComponent } from './doctor/pending-appointments/pending-appointments.component';
+import { TodaysAppointmentsComponent } from './doctor/todays-appointments/todays-appointments.component';
+import { UpdateHistoryComponent } from './doctor/update-history/update-history.component';
+import { GenerateBillComponent } from './doctor/generate-bill/generate-bill.component';
+import { PatientHistoryComponent } from './doctor/patient-history/patient-history.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'doctor/home', pathMatch: 'full' },
   { path: 'patient/home', component: PatientHomeComponent },
-  { path: 'patient/appointment', component: CurrentAppointmentComponent },
-  { path: 'patient/bills', component: BillsHistoryComponent },
-  { path: 'patient/treatments', component: TreatmentHistoryComponent },
-  { path: 'patient/appointment/request', component: TakeAppointmentComponent },
+  { path: 'patient/current-appointment', component: CurrentAppointmentComponent },
+  { path: 'patient/bill-history', component: BillHistoryComponent },
+  { path: 'patient/treatment-history', component: TreatmentHistoryComponent },
+  { path: 'patient/take-appointment', component: TakeAppointmentComponent },
   { path: 'patient/notifications', component: NotificationsComponent },
-  { path: 'patient/bills', component: BillHistoryComponent },
-{ path: 'patient/treatments', component: TreatmentsHistoryComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' }
+  { path: 'patient/feedback', component: FeedbackComponent },
+  { path: 'doctor/home', component: DoctorHomeComponent },
+  { path: 'doctor/pending-appointments', component: PendingAppointmentsComponent },
+  { path: 'doctor/todays-appointments', component: TodaysAppointmentsComponent },
+  { path: 'doctor/update-history', component: UpdateHistoryComponent },
+  { path: 'doctor/generate-bill', component: GenerateBillComponent },
+  { path: 'doctor/patient-history', component: PatientHistoryComponent },
 ];
 
