@@ -45,3 +45,6 @@ tsconfig.json
 tsconfig.spec.json
 package-lock.json
 package.json
+angular.json
+.editorconfig
+.vscode
