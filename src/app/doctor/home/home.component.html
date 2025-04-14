@@ -1,1 +1,23 @@
-<p>home works!</p>
+<div class="container mt-5">
+    <div class="card shadow mx-auto" style="max-width: 500px;">
+      <div class="card-body">
+        <h4 class="card-title mb-3">👩‍⚕️ Welcome, {{ doctor.name }}</h4>
+        <p class="card-text"><strong>Email:</strong> {{ doctor.email }}</p>
+        <p class="card-text"><strong>Phone:</strong> {{ doctor.phone }}</p>
+        <p class="card-text"><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+        <p class="card-text"><strong>Experience:</strong> {{ doctor.experience }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container text-center py-5">
+    <h2 class="mb-4">🩺 Doctor Dashboard</h2>
+    <div class="d-grid gap-3 col-6 mx-auto">
+      <a routerLink="/doctor/pending-appointments" class="btn btn-warning btn-lg">📋 Pending Appointments</a>
+      <a routerLink="/doctor/todays-appointments" class="btn btn-success btn-lg">📅 Today's Appointments</a>
+      <a routerLink="/doctor/update-history" class="btn btn-primary btn-lg">📝 Update History</a>
+      <a routerLink="/doctor/generate-bill" class="btn btn-info btn-lg">💸 Generate Bill</a>
+      <a routerLink="/doctor/patient-history" class="btn btn-dark btn-lg">📄 Patient History</a>
+    </div>
+  </div>
+  

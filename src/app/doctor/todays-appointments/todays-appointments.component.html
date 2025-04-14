@@ -1,0 +1,18 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📅 Today's Appointments</h2>
+  
+    <div *ngIf="todaysAppointments.length === 0" class="alert alert-warning text-center">
+      No appointments scheduled for today.
+    </div>
+  
+    <div *ngFor="let appointment of todaysAppointments" class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ appointment.patientName }}</h5>
+        <p class="card-text">
+          <strong>Time:</strong> {{ appointment.time }}<br />
+          <strong>Problem:</strong> {{ appointment.problem }}
+        </p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">⏳ Pending Appointments</h2>
+  
+    <div *ngIf="pendingAppointments.length === 0" class="alert alert-info text-center">
+      No pending appointments.
+    </div>
+  
+    <div *ngFor="let appointment of pendingAppointments" class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ appointment.patientName }}</h5>
+        <p class="card-text">
+          <strong>Date:</strong> {{ appointment.date }}<br />
+          <strong>Time:</strong> {{ appointment.time }}<br />
+          <strong>Symptoms:</strong> {{ appointment.symptoms }}
+        </p>
+        <button class="btn btn-success me-2" (click)="acceptAppointment(appointment.id)">Accept</button>
+        <button class="btn btn-danger" (click)="rejectAppointment(appointment.id)">Reject</button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📝 Update Treatment History</h2>
+  
+    <form (ngSubmit)="submitHistory()" class="shadow p-4 rounded bg-light">
+      <div class="mb-3">
+        <label class="form-label">Patient ID</label>
+        <input type="text" class="form-control" [(ngModel)]="patientId" name="patientId" required />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Diagnosis</label>
+        <input type="text" class="form-control" [(ngModel)]="diagnosis" name="diagnosis" required />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Prescription</label>
+        <input type="text" class="form-control" [(ngModel)]="prescription" name="prescription" required />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Additional Notes</label>
+        <textarea class="form-control" [(ngModel)]="notes" name="notes" rows="3"></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-success w-100">✅ Update History</button>
+    </form>
+  </div>
+  
