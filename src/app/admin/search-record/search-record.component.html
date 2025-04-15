@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h2 class="mb-4">🔍 Search Records</h2>
+  
+    <div class="mb-3">
+      <label class="form-label">Search by</label>
+      <select [(ngModel)]="searchType" class="form-select">
+        <option value="patient">Patient</option>
+        <option value="doctor">Doctor</option>
+      </select>
+    </div>
+  
+    <div class="mb-3">
+      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Enter name or ID" />
+    </div>
+  
+    <button class="btn btn-primary mb-4" (click)="search()">Search</button>
+  
+    <div *ngIf="showResults">
+      <h5>Results:</h5>
+      <div *ngIf="results.length > 0; else noResult">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let result of results">
+            <strong>{{ result.name }}</strong> (ID: {{ result.id }})
+            <div *ngIf="searchType === 'patient'">Age: {{ result.age }}, Email: {{ result.email }}</div>
+            <div *ngIf="searchType === 'doctor'">Specialization: {{ result.specialization }}</div>
+          </li>
+        </ul>
+      </div>
+      <ng-template #noResult>
+        <p class="text-danger">No matching records found.</p>
+      </ng-template>
+    </div>
+  </div>
+  

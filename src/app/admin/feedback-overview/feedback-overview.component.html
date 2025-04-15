@@ -1,0 +1,16 @@
+<div class="container mt-4">
+    <h2 class="mb-4">⭐ Patient Feedback Overview</h2>
+  
+    <div class="card mb-3" *ngFor="let feedback of feedbackList">
+      <div class="card-body">
+        <h5 class="card-title">{{ feedback.patient }}</h5>
+        <p class="card-text">
+          <strong>Rating:</strong>
+          <span *ngFor="let star of [].constructor(feedback.rating)">⭐</span>
+        </p>
+        <p class="card-text"><strong>Comments:</strong> {{ feedback.comments }}</p>
+        <small class="text-muted">Date: {{ feedback.date }}</small>
+      </div>
+    </div>
+  </div>
+  

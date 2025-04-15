@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-admin-home',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
-
+export class AdminHomeComponent {
+  admin = {
+    name: 'Admin User',
+    email: 'admin@hospital.com',
+    role: 'Administrator',
+  };
 }
+

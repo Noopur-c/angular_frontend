@@ -1,1 +1,20 @@
-<p>dashboard works!</p>
+<div class="container mt-5">
+    <div class="card shadow text-center mx-auto" style="max-width: 500px;">
+      <div class="card-body">
+        <h4 class="card-title mb-3">👨‍💼 Welcome, {{ admin.name }}</h4>
+        <p class="card-text"><strong>Email:</strong> {{ admin.email }}</p>
+        <p class="card-text"><strong>Role:</strong> {{ admin.role }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container text-center mt-5">
+    <h2>🛠️ Admin Dashboard</h2>
+    <div class="d-grid gap-3 col-6 mx-auto mt-4">
+      <a routerLink="/admin/users" class="btn btn-primary">👥 Manage Users</a>
+      <a routerLink="/admin/search-record" class="btn btn-secondary">🔍 Search Records</a>
+      <a routerLink="/admin/notifications" class="btn btn-warning">🔔 View Notifications</a>
+      <a routerLink="/admin/feedback-overview" class="btn btn-info">💬 Feedback Overview</a>
+    </div>
+  </div>
+  
