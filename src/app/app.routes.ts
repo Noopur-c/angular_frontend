@@ -12,9 +12,15 @@ import { TodaysAppointmentsComponent } from './doctor/todays-appointments/todays
 import { UpdateHistoryComponent } from './doctor/update-history/update-history.component';
 import { GenerateBillComponent } from './doctor/generate-bill/generate-bill.component';
 import { PatientHistoryComponent } from './doctor/patient-history/patient-history.component';
+import { AdminHomeComponent } from './admin/dashboard/dashboard.component';
+import { AdminClinicStatsComponent } from './admin/clinic-stats/clinic-stats.component';
+import { UsersComponent } from './admin/users/users.component';
+import { SearchRecordComponent } from './admin/search-record/search-record.component';
+import { NotificationsComponent as AdminNotificationsComponent } from './admin/notifications/notifications.component';
+import { FeedbackOverviewComponent } from './admin/feedback-overview/feedback-overview.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'doctor/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'patient/home', pathMatch: 'full' },
   { path: 'patient/home', component: PatientHomeComponent },
   { path: 'patient/current-appointment', component: CurrentAppointmentComponent },
   { path: 'patient/bill-history', component: BillHistoryComponent },
@@ -28,5 +34,11 @@ export const routes: Routes = [
   { path: 'doctor/update-history', component: UpdateHistoryComponent },
   { path: 'doctor/generate-bill', component: GenerateBillComponent },
   { path: 'doctor/patient-history', component: PatientHistoryComponent },
+  { path: 'admin/home', component: AdminHomeComponent },
+  { path: 'admin/stats', component: AdminClinicStatsComponent },
+  { path: 'admin/users',component: UsersComponent },
+{ path: 'admin/search-records', component: SearchRecordComponent },
+{ path: 'admin/notifications', component: AdminNotificationsComponent },
+{ path: 'admin/feedback', component: FeedbackOverviewComponent },
 ];
 
