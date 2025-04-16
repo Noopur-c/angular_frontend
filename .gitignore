@@ -36,6 +36,8 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+angular.json
+styles.css
 
 # System files
 .DS_Store
@@ -45,5 +47,4 @@ tsconfig.json
 tsconfig.spec.json
 package-lock.json
 package.json
-angular.json
 .editorconfig
