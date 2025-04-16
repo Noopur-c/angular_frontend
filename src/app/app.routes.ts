@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { PatientHomeComponent } from './patient/home/home.component';
 import { CurrentAppointmentComponent } from './patient/current-appointment/current-appointment.component';
 import { BillHistoryComponent } from './patient/bill-history/bill-history.component';
@@ -20,7 +21,7 @@ import { NotificationsComponent as AdminNotificationsComponent } from './admin/n
 import { FeedbackOverviewComponent } from './admin/feedback-overview/feedback-overview.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'patient/home', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'patient/home', component: PatientHomeComponent },
   { path: 'patient/current-appointment', component: CurrentAppointmentComponent },
   { path: 'patient/bill-history', component: BillHistoryComponent },
@@ -41,4 +42,3 @@ export const routes: Routes = [
 { path: 'admin/notifications', component: AdminNotificationsComponent },
 { path: 'admin/feedback', component: FeedbackOverviewComponent },
 ];
-
