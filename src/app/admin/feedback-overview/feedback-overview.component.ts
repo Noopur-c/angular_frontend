@@ -10,19 +10,19 @@ import { CommonModule } from '@angular/common';
 export class FeedbackOverviewComponent {
   feedbackList = [
     {
-      patient: 'John Doe',
+      patient: 'Patient 1',
       rating: 5,
       comments: 'Excellent service and friendly staff!',
       date: '2025-04-10',
     },
     {
-      patient: 'Jane Smith',
+      patient: 'Patient 3',
       rating: 3,
       comments: 'Wait time was a bit long, but doctor was helpful.',
       date: '2025-04-08',
     },
     {
-      patient: 'Ramesh Kumar',
+      patient: 'Patient 2',
       rating: 4,
       comments: 'Smooth appointment process.',
       date: '2025-04-05',

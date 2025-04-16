@@ -15,13 +15,13 @@ export class SearchRecordComponent {
   showResults = false;
 
   mockPatients = [
-    { id: 'P001', name: 'John Doe', age: 30, email: 'john@example.com' },
-    { id: 'P002', name: 'Jane Smith', age: 25, email: 'jane@example.com' }
+    { id: 'P001', name: 'Patient 1', age: 30, email: 'aaaPatient1@example.com' },
+    { id: 'P002', name: 'Patient 2', age: 25, email: 'bbbPatent2@example.com' }
   ];
 
   mockDoctors = [
-    { id: 'D001', name: 'Dr. Shreya Kapoor', specialization: 'Cardiology' },
-    { id: 'D002', name: 'Dr. Aman Mehta', specialization: 'Neurology' }
+    { id: 'D001', name: 'Dr. Doctor 1', specialization: 'Cardiology' },
+    { id: 'D002', name: 'Dr. Doctor 2', specialization: 'Neurology' }
   ];
 
   search() {

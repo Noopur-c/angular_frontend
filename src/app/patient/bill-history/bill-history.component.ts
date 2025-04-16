@@ -11,14 +11,14 @@ export class BillHistoryComponent {
   bills = [
     {
       appointmentId: 201,
-      doctor: 'Dr. Aisha Khan',
+      doctor: 'Dr. Doctor 1',
       date: 'April 1, 2025',
       amount: 800,
       status: 'Paid'
     },
     {
       appointmentId: 202,
-      doctor: 'Dr. Priya Sharma',
+      doctor: 'Dr. Doctor 2',
       date: 'March 25, 2025',
       amount: 650,
       status: 'Paid'

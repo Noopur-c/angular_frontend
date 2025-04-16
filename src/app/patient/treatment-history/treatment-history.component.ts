@@ -11,7 +11,7 @@ export class TreatmentHistoryComponent {
   treatments = [
     {
       date: '2025-03-10',
-      doctor: 'Dr. Aisha Khan',
+      doctor: 'Dr. Doctor 3',
       department: 'Cardiology',
       diagnosis: 'Hypertension',
       prescription: 'Amlodipine 5mg, daily',
@@ -19,7 +19,7 @@ export class TreatmentHistoryComponent {
     },
     {
       date: '2025-03-22',
-      doctor: 'Dr. Rohan Mehta',
+      doctor: 'Dr. Doctor 2',
       department: 'Dermatology',
       diagnosis: 'Acne Vulgaris',
       prescription: 'Benzoyl Peroxide gel, twice daily',

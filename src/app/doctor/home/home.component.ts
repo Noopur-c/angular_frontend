@@ -10,8 +10,8 @@ import { RouterModule } from '@angular/router';
 })
 export class DoctorHomeComponent {
   doctor = {
-    name: 'Dr. Priya Sharma',
-    email: 'priya.sharma@hospital.com',
+    name: 'Dr. Doctor 1',
+    email: 'bbbDoctor1@hospital.com',
     phone: '+91-9876543210',
     specialization: 'Cardiology',
     experience: '10 years'

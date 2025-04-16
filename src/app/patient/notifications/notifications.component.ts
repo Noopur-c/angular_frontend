@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 export class NotificationsComponent {
   notifications = [
     {
-      message: 'Your appointment with Dr. Aisha Khan has been approved.',
+      message: 'Your appointment with Dr. Doctor 3 has been approved.',
       status: 'approved',
       time: 'April 10, 2025 - 11:00 AM'
     },
     {
-      message: 'Your appointment with Dr. Priya Sharma has been rejected.',
+      message: 'Your appointment with Dr. Doctor 1 has been rejected.',
       status: 'rejected',
       time: 'April 9, 2025 - 03:15 PM'
     }

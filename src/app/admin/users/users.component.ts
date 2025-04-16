@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class UsersComponent {
   users = [
-    { name: 'John Doe', role: 'Patient', email: 'john@example.com' },
-    { name: 'Dr. Nisha Sharma', role: 'Doctor', email: 'nisha@hospital.com' },
+    { name: 'Patient 1', role: 'Patient', email: 'aaaPatient1@example.com' },
+    { name: 'Dr. Doctor 1', role: 'Doctor', email: 'bbbDoctor1@hospital.com' },
     { name: 'Admin 1', role: 'Admin', email: 'admin1@hospital.com' }
   ];
 }

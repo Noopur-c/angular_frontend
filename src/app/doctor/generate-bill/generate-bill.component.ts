@@ -24,7 +24,6 @@ export class GenerateBillComponent {
 
     alert('💸 Bill generated successfully!');
 
-    // Clear form
     this.patientId = '';
     this.appointmentId = '';
     this.amount = '';

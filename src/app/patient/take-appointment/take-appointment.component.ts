@@ -2,59 +2,33 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-type Department = 'Cardiology' | 'Dermatology' | 'Neurology';
-
-interface Doctor {
-  id: number;
-  name: string;
-  experience: string;
-  specialization: string;
-}
-
 @Component({
   selector: 'app-take-appointment',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './take-appointment.component.html',
-  
 })
-
 export class TakeAppointmentComponent {
-  departments: Department[] = ['Cardiology', 'Dermatology', 'Neurology'];
-
-  doctors: Record<Department, Doctor[]> = {
-    Cardiology: [
-      { id: 1, name: 'Dr. Aisha Khan', experience: '10 years', specialization: 'Heart Specialist' }
-    ],
-    Dermatology: [
-      { id: 2, name: 'Dr. Rohan Mehta', experience: '6 years', specialization: 'Skin & Hair' }
-    ],
-    Neurology: [
-      { id: 3, name: 'Dr. Priya Sharma', experience: '8 years', specialization: 'Brain & Spine' }
-    ]
+  departments = ['Cardiology', 'Neurology', 'Orthopedics'];
+  doctors: { [key: string]: string[] } = {
+    Cardiology: ['Dr. Doctor 1', 'Dr. Doctor 2'],
+    Neurology: ['Dr. Doctor 3'],
+    Orthopedics: ['Dr. Doctor 4'],
   };
 
-  slots: Record<number, string[]> = {
-    1: ['10:00 AM', '11:30 AM', '2:00 PM'],
-    2: ['9:30 AM', '1:00 PM', '3:30 PM'],
-    3: ['10:15 AM', '12:45 PM', '4:00 PM']
+  form = {
+    department: '',
+    doctor: '',
+    date: '',
   };
 
-  selectedDept: Department | null = null;
-  selectedDoctor: Doctor | null = null;
-  selectedSlot: string | null = null;
-
-  get doctorsList(): Doctor[] {
-    return this.selectedDept ? this.doctors[this.selectedDept] : [];
+  get filteredDoctors(): string[] {
+    return this.form.department ? this.doctors[this.form.department] : [];
   }
 
-  handleSubmit() {
-    if (this.selectedDoctor && this.selectedSlot) {
-      alert(
-        `Appointment requested with ${this.selectedDoctor.name} at ${this.selectedSlot}`
-      );
+  submitForm() {
+    if (this.form.department && this.form.doctor && this.form.date) {
+      alert('Appointment Booked! ✅');
     }
   }
 }
-
-

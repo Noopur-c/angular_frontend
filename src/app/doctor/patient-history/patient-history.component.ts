@@ -32,13 +32,13 @@ export class PatientHistoryComponent {
         date: '2024-12-15',
         diagnosis: 'Hypertension',
         prescription: 'Amlodipine 5mg',
-        doctor: 'Dr. Shreya Kapoor',
+        doctor: 'Dr. Doctor 1',
       },
       {
         date: '2025-01-20',
         diagnosis: 'Migraine',
         prescription: 'Sumatriptan',
-        doctor: 'Dr. Aman Mehta',
+        doctor: 'Dr. Doctor 3',
       },
     ],
     '2': [
@@ -46,7 +46,7 @@ export class PatientHistoryComponent {
         date: '2025-02-10',
         diagnosis: 'Diabetes Type 2',
         prescription: 'Metformin 500mg',
-        doctor: 'Dr. Nikhil Joshi',
+        doctor: 'Dr. Doctor 2',
       },
     ],
   };

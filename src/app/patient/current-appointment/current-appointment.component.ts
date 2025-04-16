@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CurrentAppointmentComponent {
   currentAppointment = {
-    doctorName: 'Dr. Aisha Khan',
+    doctorName: 'Dr. Doctor 2',
     department: 'Cardiology',
     date: '2025-04-15',
     time: '10:30 AM',

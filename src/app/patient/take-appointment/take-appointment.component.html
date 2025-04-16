@@ -1,47 +1,61 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">🗓️ Take Appointment</h2>
-  
-    <!-- Select Department -->
-    <div class="mb-4">
-      <label class="form-label"><strong>Select Department</strong></label>
-      <select [(ngModel)]="selectedDept" class="form-select">
-        <option value="" disabled selected>Select a department</option>
+  <form #appointmentForm="ngForm" (ngSubmit)="submitForm()" novalidate>
+    
+    <div class="mb-3">
+      <label class="form-label">Select Department</label>
+      <select
+        name="department"
+        class="form-select"
+        [(ngModel)]="form.department"
+        required
+        #department="ngModel"
+      >
+        <option value="" disabled selected>Select one</option>
         <option *ngFor="let dept of departments" [value]="dept">{{ dept }}</option>
       </select>
-    </div>
-  
-    <!-- Select Doctor -->
-    <div *ngIf="selectedDept" class="mb-4">
-      <label class="form-label"><strong>Select Doctor</strong></label>
-      <select [(ngModel)]="selectedDoctor" class="form-select">
-        <option value="" disabled selected>Select a doctor</option>
-        <option *ngFor="let doc of doctors[selectedDept]" [ngValue]="doc">
-          {{ doc.name }}
-        </option>
-      </select>
-    </div>
-  
-    <!-- Doctor Profile -->
-    <div *ngIf="selectedDoctor" class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h5>{{ selectedDoctor.name }}</h5>
-        <p><strong>Experience:</strong> {{ selectedDoctor.experience }}</p>
-        <p><strong>Specialization:</strong> {{ selectedDoctor.specialization }}</p>
+      <div *ngIf="department.invalid && department.touched" class="text-danger">
+        Department is required.
       </div>
     </div>
-  
-    <!-- Select Slot -->
-    <div *ngIf="selectedDoctor" class="mb-4">
-      <label class="form-label"><strong>Select Slot</strong></label>
-      <select [(ngModel)]="selectedSlot" class="form-select">
-        <option value="" disabled selected>Select a slot</option>
-        <option *ngFor="let time of slots[selectedDoctor.id]">{{ time }}</option>
+
+    <div class="mb-3">
+      <label class="form-label">Select Doctor</label>
+      <select
+        name="doctor"
+        class="form-select"
+        [(ngModel)]="form.doctor"
+        required
+        #doctor="ngModel"
+      >
+        <option value="" disabled selected>Select one</option>
+        <option *ngFor="let doc of filteredDoctors" [value]="doc">{{ doc }}</option>
       </select>
+      <div *ngIf="doctor.invalid && doctor.touched" class="text-danger">
+        Doctor is required.
+      </div>
     </div>
-  
-    <!-- Submit -->
-    <div *ngIf="selectedSlot">
-      <button class="btn btn-primary" (click)="handleSubmit()">📨 Request Appointment</button>
+
+    <div class="mb-3">
+      <label class="form-label">Select Date</label>
+      <input
+        type="date"
+        class="form-control"
+        name="date"
+        [(ngModel)]="form.date"
+        required
+        #date="ngModel"
+      />
+      <div *ngIf="date.invalid && date.touched" class="text-danger">
+        Date is required.
+      </div>
     </div>
-  </div>
-  
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      [disabled]="appointmentForm.invalid"
+    >
+      Book Appointment
+    </button>
+  </form>
+</div>

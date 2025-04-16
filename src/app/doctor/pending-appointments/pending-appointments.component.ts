@@ -11,14 +11,14 @@ export class PendingAppointmentsComponent {
   pendingAppointments = [
     {
       id: 1,
-      patientName: 'John Doe',
+      patientName: 'Patieint 1',
       date: '2025-04-15',
       time: '10:00 AM',
       symptoms: 'Chest pain',
     },
     {
       id: 2,
-      patientName: 'Jane Smith',
+      patientName: 'Patient 2',
       date: '2025-04-15',
       time: '11:00 AM',
       symptoms: 'Shortness of breath',

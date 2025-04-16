@@ -11,19 +11,19 @@ export class TodaysAppointmentsComponent {
   todaysAppointments = [
     {
       id: 101,
-      patientName: 'Rohit Sharma',
+      patientName: 'Patient 3',
       time: '9:00 AM',
       problem: 'Back pain',
     },
     {
       id: 102,
-      patientName: 'Priya Verma',
+      patientName: 'Patient 2',
       time: '10:30 AM',
       problem: 'Migraine',
     },
     {
       id: 103,
-      patientName: 'Aman Singh',
+      patientName: 'Patient 4',
       time: '12:00 PM',
       problem: 'Fatigue',
     },
