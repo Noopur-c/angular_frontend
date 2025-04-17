@@ -20,7 +20,7 @@ export class PatientLoginComponent {
       // mock login logic
       this.router.navigate(['/patient/home']);
     } else {
-      alert('Please enter valid credentials');
+      alert('Please enter your credentials');
     }
   }
 }

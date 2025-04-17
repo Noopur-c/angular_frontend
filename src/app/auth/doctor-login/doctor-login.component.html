@@ -1,0 +1,15 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">👨‍⚕️ Doctor Login</h2>
+    <form (ngSubmit)="login()">
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" class="form-control" [(ngModel)]="credentials.email" name="email" required />
+      </div>
+      <div class="mb-3">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="credentials.password" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
+  
