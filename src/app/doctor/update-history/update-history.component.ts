@@ -9,14 +9,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './update-history.component.html',
 })
 export class UpdateHistoryComponent {
-  patientId = '';
+  patientName = '';
   diagnosis = '';
   prescription = '';
   notes = '';
 
   submitHistory() {
     console.log('History Updated:', {
-      patientId: this.patientId,
+      patientName: this.patientName,
       diagnosis: this.diagnosis,
       prescription: this.prescription,
       notes: this.notes,
@@ -25,7 +25,7 @@ export class UpdateHistoryComponent {
     alert('📝 Patient history updated successfully!');
     
     // Reset fields
-    this.patientId = '';
+    this.patientName = '';
     this.diagnosis = '';
     this.prescription = '';
     this.notes = '';

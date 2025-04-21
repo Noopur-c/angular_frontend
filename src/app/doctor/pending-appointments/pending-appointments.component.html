@@ -1,21 +1,46 @@
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">⏳ Pending Appointments</h2>
-  
-    <div *ngIf="pendingAppointments.length === 0" class="alert alert-info text-center">
-      No pending appointments.
-    </div>
-  
-    <div *ngFor="let appointment of pendingAppointments" class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ appointment.patientName }}</h5>
-        <p class="card-text">
-          <strong>Date:</strong> {{ appointment.date }}<br />
-          <strong>Time:</strong> {{ appointment.time }}<br />
-          <strong>Symptoms:</strong> {{ appointment.symptoms }}
-        </p>
-        <button class="btn btn-success me-2" (click)="acceptAppointment(appointment.id)">Accept</button>
-        <button class="btn btn-danger" (click)="rejectAppointment(appointment.id)">Reject</button>
+  <h2 class="text-center mb-4">Pending Appointments</h2>
+
+  <div *ngFor="let appointment of pendingAppointments" class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Appointment #{{ appointment.appointmentId }}</h5>
+      <p><strong>Date:</strong> {{ appointment.date }}</p>
+      <p><strong>Time:</strong> {{ appointment.time }}</p>
+      
+      <p><strong>Patient Information:</strong></p>
+      <ul>
+        <li><strong>Name:</strong> {{ appointment.patient.name }}</li>
+        <li><strong>Email:</strong> {{ appointment.patient.email }}</li>
+        <li><strong>Phone:</strong> {{ appointment.patient.phone }}</li>
+        <li><strong>Gender:</strong> {{ appointment.patient.gender }}</li>
+        <li><strong>Age:</strong> {{ appointment.patient.age }} years</li>
+        <li><strong>Height:</strong> {{ appointment.patient.height }} cm</li>
+        <li><strong>Weight:</strong> {{ appointment.patient.weight }} kg</li>
+        <li><strong>Birthday:</strong> {{ appointment.patient.birthday | date:'shortDate' }}</li>
+      </ul>
+
+      <span class="badge bg-warning">{{ appointment.status }}</span>
+
+      <!-- Accept and Reject buttons -->
+      <div class="mt-3">
+        <button
+          *ngIf="appointment.status === 'Pending'"
+          class="btn btn-success me-2"
+          (click)="acceptAppointment(appointment.appointmentId)"
+        >
+          Accept
+        </button>
+        <button
+          *ngIf="appointment.status === 'Pending'"
+          class="btn btn-danger"
+          (click)="rejectAppointment(appointment.appointmentId)"
+        >
+          Reject
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+
   

@@ -1,41 +1,41 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">📄 Patient Treatment History</h2>
-  
-    <div class="mb-4 d-flex gap-2">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter Patient ID"
-        [(ngModel)]="patientId"
-      />
-      <button class="btn btn-primary" (click)="fetchHistory()">🔍 Search</button>
-    </div>
-  
-    <div *ngIf="showHistory">
-      <div *ngIf="treatmentHistory.length > 0; else noHistory">
-        <table class="table table-bordered table-hover">
-          <thead class="table-light">
-            <tr>
-              <th>Date</th>
-              <th>Diagnosis</th>
-              <th>Prescription</th>
-              <th>Doctor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let record of treatmentHistory">
-              <td>{{ record.date }}</td>
-              <td>{{ record.diagnosis }}</td>
-              <td>{{ record.prescription }}</td>
-              <td>{{ record.doctor }}</td>
-            </tr>
-          </tbody>
-        </table>
+<div class="container mt-4">
+  <h2 class="mb-3">Patient History</h2>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="patientName"
+      placeholder="Enter patient name"
+    />
+    <button class="btn btn-primary" (click)="fetchHistory()">Search</button>
+  </div>
+
+  <div *ngIf="showHistory && selectedPatient; else notFound">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">{{ selectedPatient.name }}</h4>
+        <p class="card-text"><strong>Age:</strong> {{ selectedPatient.age }}</p>
+        <p class="card-text"><strong>Occupation:</strong> {{ selectedPatient.occupation }}</p>
       </div>
-  
-      <ng-template #noHistory>
-        <p class="text-danger">⚠️ No treatment records found for this patient.</p>
-      </ng-template>
+    </div>
+
+    <h5 class="mt-4">Consultation History</h5>
+    <div *ngFor="let entry of selectedPatient.consultations" class="card mb-2 shadow-sm">
+      <div class="card-body">
+        <p class="mb-1"><strong>Date:</strong> {{ entry.date }}</p>
+        <p class="mb-1"><strong>Diagnosis:</strong> {{ entry.diagnosis }}</p>
+        <p class="mb-1"><strong>Prescription:</strong> {{ entry.prescription }}</p>
+        <p class="mb-0"><strong>Doctor:</strong> {{ entry.doctor }}</p>
+      </div>
     </div>
   </div>
+
+  <ng-template #notFound>
+    <div *ngIf="showHistory" class="alert alert-warning">
+      No records found for "{{ patientName }}"
+    </div>
+  </ng-template>
+</div>
+
   

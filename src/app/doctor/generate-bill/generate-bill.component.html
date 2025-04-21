@@ -1,28 +1,59 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">💸 Generate Bill</h2>
-  
-    <form (ngSubmit)="generateBill()" class="shadow p-4 rounded bg-light">
-      <div class="mb-3">
-        <label class="form-label">Patient ID</label>
-        <input type="text" class="form-control" [(ngModel)]="patientId" name="patientId" required />
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">Appointment ID</label>
-        <input type="text" class="form-control" [(ngModel)]="appointmentId" name="appointmentId" required />
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">Amount (₹)</label>
-        <input type="number" class="form-control" [(ngModel)]="amount" name="amount" required />
-      </div>
-  
-      <div class="mb-3">
-        <label class="form-label">Remarks (optional)</label>
-        <textarea class="form-control" [(ngModel)]="remarks" name="remarks" rows="2"></textarea>
-      </div>
-  
-      <button type="submit" class="btn btn-primary w-100">🧾 Generate Bill</button>
-    </form>
+  <h2 class="mb-4">Generate Bill</h2>
+
+  <!-- Patient Name Input -->
+  <div class="mb-3">
+    <label for="patientName" class="form-label">Patient Name</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="patientName" 
+      [(ngModel)]="patientName" 
+      (ngModelChange)="fetchPatientDetails()" 
+      placeholder="Enter patient's name" />
   </div>
-  
+
+  <!-- Patient Details (only shows if details are found) -->
+  <div *ngIf="patientDetails" class="card mt-4">
+    <div class="card-body">
+      <h5 class="card-title">Patient Details</h5>
+      <p><strong>Current Diagnosis:</strong> {{ patientDetails.currentDiagnosis }}</p>
+      <p><strong>Current Prescription:</strong> {{ patientDetails.currentPrescription }}</p>
+
+      <h6>Previous Prescriptions</h6>
+      <ul>
+        <li *ngFor="let prescription of patientDetails.previousPrescriptions">
+          <strong>{{ prescription.date }}:</strong> {{ prescription.diagnosis }} - {{ prescription.prescription }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bill Amount Input -->
+  <div class="mb-3">
+    <label for="billAmount" class="form-label">Bill Amount (₹)</label>
+    <input 
+      type="number" 
+      class="form-control" 
+      id="billAmount" 
+      [(ngModel)]="billAmount" 
+      placeholder="Enter the bill amount" />
+  </div>
+
+  <!-- Remarks Input -->
+  <div class="mb-3">
+    <label for="remarks" class="form-label">Remarks</label>
+    <textarea 
+      class="form-control" 
+      id="remarks" 
+      rows="3" 
+      [(ngModel)]="remarks" 
+      placeholder="Enter remarks"></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <button 
+    class="btn btn-primary" 
+    (click)="submitBill()">Generate Bill</button>
+</div>
+

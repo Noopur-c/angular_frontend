@@ -2,18 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-// Define the type for the treatment history object
-interface Treatment {
-  date: string;
-  diagnosis: string;
-  prescription: string;
-  doctor: string;
-}
-
-interface TreatmentHistory {
-  [key: string]: Treatment[]; // Index signature for dynamic keys
-}
-
 @Component({
   selector: 'app-patient-history',
   standalone: true,
@@ -21,41 +9,49 @@ interface TreatmentHistory {
   templateUrl: './patient-history.component.html',
 })
 export class PatientHistoryComponent {
-  patientId = '';
-  treatmentHistory: Treatment[] = [];
+  patientName = '';
+  selectedPatient: any = null;
   showHistory = false;
 
-  // Mock data with treatment history for patients
-  mockHistory: TreatmentHistory = {
-    '1': [
-      {
-        date: '2024-12-15',
-        diagnosis: 'Hypertension',
-        prescription: 'Amlodipine 5mg',
-        doctor: 'Dr. Doctor 1',
-      },
-      {
-        date: '2025-01-20',
-        diagnosis: 'Migraine',
-        prescription: 'Sumatriptan',
-        doctor: 'Dr. Doctor 3',
-      },
-    ],
-    '2': [
-      {
-        date: '2025-02-10',
-        diagnosis: 'Diabetes Type 2',
-        prescription: 'Metformin 500mg',
-        doctor: 'Dr. Doctor 2',
-      },
-    ],
+  mockPatients = {
+    'John Doe': {
+      name: 'John Doe',
+      age: 32,
+      occupation: 'Software Engineer',
+      consultations: [
+        {
+          date: '2024-12-15',
+          diagnosis: 'Hypertension',
+          prescription: 'Amlodipine 5mg',
+          doctor: 'Dr. Shreya Kapoor',
+        },
+        {
+          date: '2025-01-20',
+          diagnosis: 'Migraine',
+          prescription: 'Sumatriptan',
+          doctor: 'Dr. Aman Mehta',
+        },
+      ],
+    },
+    'Jane Smith': {
+      name: 'Jane Smith',
+      age: 28,
+      occupation: 'Teacher',
+      consultations: [
+        {
+          date: '2025-02-10',
+          diagnosis: 'Diabetes Type 2',
+          prescription: 'Metformin 500mg',
+          doctor: 'Dr. Nikhil Joshi',
+        },
+      ],
+    },
   };
 
-  // Fetch the treatment history based on patientId
   fetchHistory() {
-    // Safely access treatment history for the patient
-    this.treatmentHistory = this.mockHistory[this.patientId] || [];
+    this.selectedPatient = (this.mockPatients as any)[this.patientName] || null;
     this.showHistory = true;
   }
 }
+
 
