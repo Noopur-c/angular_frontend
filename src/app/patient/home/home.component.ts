@@ -10,10 +10,15 @@ import { RouterModule } from '@angular/router';
 })
 export class PatientHomeComponent {
   patient = {
-    name: 'Patient 1',
-    email: 'aaa.patient.1@example.com',
+    name: 'AAA BBB',
+    email: 'aaa.bbb@example.com',
     phone: '+91-9876543210',
-    gender: 'Male'
+    gender: 'Male',
+    age: 32,
+    birthday: '1993-08-15',
+    height: '175 cm',
+    weight: '70 kg'
   };
 }
+
 
