@@ -1,20 +1,78 @@
 <div class="container mt-4">
-    <h2 class="mb-3">👥 All Users</h2>
-    <table class="table table-bordered table-hover">
-      <thead class="table-light">
+  <div class="d-flex justify-content-between mb-3">
+    <h4>Manage Users</h4>
+    <select class="form-select w-auto" [(ngModel)]="selectedRole">
+      <option value="All">All</option>
+      <option value="Patient">Patient</option>
+      <option value="Doctor">Doctor</option>
+      <option value="Staff">Staff</option>
+    </select>
+  </div>
+
+  <div class="d-flex justify-content-between mb-3">
+    <button class="btn btn-primary" routerLink="/admin/add-user">Add User</button>
+  </div>
+
+  <!-- Show Patients Table -->
+  <div *ngIf="selectedRole === 'All' || selectedRole === 'Patient'" class="mb-5">
+    <h5>Patients</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
         <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Email</th>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Joining Date</th>
+          <th>Last Consultation</th><th>Payment</th><th>Occupation</th><th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.name }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.email }}</td>
+        <tr *ngFor="let user of users.Patient; let i = index">
+          <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
+          <td>{{ user.joiningDate }}</td><td>{{ user.lastConsultation }}</td><td>{{ user.paymentStatus }}</td>
+          <td>{{ user.occupation }}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Patient', i)">Delete</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-  
+
+  <!-- Show Doctors Table -->
+  <div *ngIf="selectedRole === 'All' || selectedRole === 'Doctor'" class="mb-5">
+    <h5>Doctors</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Joining Date</th>
+          <th>Experience</th><th>Salary</th><th>Department</th><th>Role</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users.Doctor; let i = index">
+          <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
+          <td>{{ user.joiningDate }}</td><td>{{ user.experience }}</td><td>{{ user.salary }}</td><td>{{ user.department }}</td>
+          <td>{{ user.role }}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Doctor', i)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Show Staff Table -->
+  <div *ngIf="selectedRole === 'All' || selectedRole === 'Staff'">
+    <h5>Staff</h5>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Joining Date</th>
+          <th>Experience</th><th>Salary</th><th>Occupation</th><th>Role</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users.Staff; let i = index">
+          <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
+          <td>{{ user.joiningDate }}</td><td>{{ user.experience }}</td><td>{{ user.salary }}</td><td>{{ user.occupation }}</td>
+          <td>{{ user.role }}</td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Staff', i)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

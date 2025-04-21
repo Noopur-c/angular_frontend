@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <h4>Add New User</h4>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="newUser.name" name="name" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="newUser.email" name="email" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" id="phone" class="form-control" [(ngModel)]="newUser.phone" name="phone" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input type="number" id="age" class="form-control" [(ngModel)]="newUser.age" name="age" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select class="form-select" [(ngModel)]="newUser.role" name="role" required>
+          <option value="Patient">Patient</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Staff">Staff</option>
+        </select>
+      </div>
+  
+      <!-- Additional fields for doctor and staff -->
+      <div *ngIf="newUser.role === 'Doctor'">
+        <div class="mb-3">
+          <label for="experience" class="form-label">Experience</label>
+          <input type="text" id="experience" class="form-control" [(ngModel)]="newUser.experience" name="experience">
+        </div>
+  
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary</label>
+          <input type="number" id="salary" class="form-control" [(ngModel)]="newUser.salary" name="salary">
+        </div>
+  
+        <div class="mb-3">
+          <label for="department" class="form-label">Department</label>
+          <input type="text" id="department" class="form-control" [(ngModel)]="newUser.department" name="department">
+        </div>
+      </div>
+  
+      <div *ngIf="newUser.role === 'Staff'">
+        <div class="mb-3">
+          <label for="occupation" class="form-label">Occupation</label>
+          <input type="text" id="occupation" class="form-control" [(ngModel)]="newUser.occupation" name="occupation">
+        </div>
+  
+        <div class="mb-3">
+          <label for="salary" class="form-label">Salary</label>
+          <input type="number" id="salary" class="form-control" [(ngModel)]="newUser.salary" name="salary">
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Add User</button>
+    </form>
+  </div>
+  
