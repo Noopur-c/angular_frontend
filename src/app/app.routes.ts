@@ -20,9 +20,14 @@ import { SearchRecordComponent } from './admin/search-record/search-record.compo
 import { NotificationsComponent as AdminNotificationsComponent } from './admin/notifications/notifications.component';
 import { FeedbackOverviewComponent } from './admin/feedback-overview/feedback-overview.component';
 import { AddUserComponent } from './admin/add-user/add-user.component';
+import { DoctorLoginComponent } from './auth/doctor-login/doctor-login.component';
+import { PatientLoginComponent } from './auth/patient-login/patient-login.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'auth/doctor-login', component: DoctorLoginComponent },
+  { path: 'auth/patient-login', component: PatientLoginComponent },
   { path: 'patient/home', component: PatientHomeComponent },
   { path: 'patient/current-appointment', component: CurrentAppointmentComponent },
   { path: 'patient/bill-history', component: BillHistoryComponent },
