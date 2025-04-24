@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   selector: 'app-patient-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './patient-login.component.html'
+  templateUrl: './patient-login.component.html',
+  styleUrls: ['./patient-login.component.css']
 })
 export class PatientLoginComponent {
   email = '';

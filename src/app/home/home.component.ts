@@ -8,5 +8,13 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  isDarkMode = false;
+
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('dark-mode', this.isDarkMode);
+  }
+
+}
 

@@ -1,0 +1,94 @@
+/* Apply these styles to the outer container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bright-blue), var(--vivid-pink));
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style the login card */
+.login-card {
+    background-color: white;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: slideUpFadeIn 0.6s ease-out;
+}
+
+.login-card h2 {
+    margin-bottom: 1.5rem;
+    color: var(--gray-900);
+    text-align: center;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-card input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-400);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.login-card input:focus {
+    border-color: var(--electric-violet);
+    outline: none;
+    box-shadow: 0 0 0 3px oklch(92.3% 0.15 295.2 / 40%);
+}
+
+.login-card button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--electric-violet);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-card button:hover {
+    background-color: var(--vivid-pink);
+}
+
+@keyframes slideUpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Form group styles for centering */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.form-group input {
+    text-align: left; /* Optional: remove if you want center-aligned text inside inputs */
+}
+
+  
+  
+  

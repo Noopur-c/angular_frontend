@@ -1,21 +1,24 @@
-<div class="container mt-5" style="max-width: 400px;">
-  <h3 class="mb-4">Doctor Login</h3>
-  
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div class="login-container">
+  <div class="login-card">
+    <h2>Doctor Login</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" [(ngModel)]="email" required />
+      </div>
 
-  <form (ngSubmit)="login()">
-    <div class="mb-3">
-      <label>Email</label>
-      <input type="email" class="form-control" [(ngModel)]="email" name="email" required />
-    </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" [(ngModel)]="password" required />
+      </div>
 
-    <div class="mb-3">
-      <label>Password</label>
-      <input type="password" class="form-control" [(ngModel)]="password" name="password" required />
-    </div>
-
-    <button class="btn btn-primary w-100" type="submit">Login</button>
-  </form>
+      <button type="submit">Login</button>
+    </form>
+  </div>
 </div>
+
+
+
+
 
   
