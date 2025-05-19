@@ -1,31 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { AdminService } from '../../services/admin.service'; // Make sure this is the correct path
 
 @Component({
-  selector: 'app-feedback-overview',
+  selector: 'app-feedback',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './feedback-overview.component.html',
+  styleUrls: ['./feedback-overview.component.css'],
 })
-export class FeedbackOverviewComponent {
-  feedbackList = [
-    {
-      patient: 'Patient 1',
-      rating: 5,
-      comments: 'Excellent service and friendly staff!',
-      date: '2025-04-10',
-    },
-    {
-      patient: 'Patient 3',
-      rating: 3,
-      comments: 'Wait time was a bit long, but doctor was helpful.',
-      date: '2025-04-08',
-    },
-    {
-      patient: 'Patient 2',
-      rating: 4,
-      comments: 'Smooth appointment process.',
-      date: '2025-04-05',
-    }
-  ];
+export class FeedbackOverviewComponent implements OnInit {
+  feedbackList: any[] = [];
+  errorMessage: string = '';
+
+  constructor(private admin: AdminService) {}
+
+  ngOnInit(): void {
+    // Fetch all feedback on component load
+    this.getFeedback();
+  }
+
+  // Get all feedback from the backend
+  getFeedback() {
+    this.admin.getFeedbackOverview().subscribe({
+      next: (response) => {
+        this.feedbackList = response;  // Assuming the response is an array of feedback
+      },
+      error: (err) => {
+        console.error('Error fetching feedback', err);
+        this.errorMessage = 'Failed to load feedback. Please try again later.';
+      }
+    });
+  }
 }

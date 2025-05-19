@@ -1,74 +1,122 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-type Doctor = {
-  name: string;
-  times: string[];
-};
-
-type DepartmentDoctors = {
-  [key: string]: Doctor[];
-};
-
+import { HttpClientModule } from '@angular/common/http';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-take-appointment',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './take-appointment.component.html',
-  
+  styleUrls: ['./take-appointment.component.css'],
 })
-
-
-
 export class TakeAppointmentComponent {
   form = {
     department: '',
-    doctor: '',
+    doctor: 0, // doctor ID
     date: '',
     time: ''
   };
-  
-  Object = Object;
 
-  availableDoctors: DepartmentDoctors = {
-    Cardiology: [
-      { name: 'Dr. Arjun Reddy', times: ['10:00 AM', '2:00 PM'] },
-      { name: 'Dr. Kavita Shah', times: ['11:00 AM', '4:00 PM'] }
-    ],
-    Neurology: [
-      { name: 'Dr. Sameer Khan', times: ['9:30 AM', '1:00 PM'] },
-      { name: 'Dr. Priya Iyer', times: ['10:30 AM', '3:30 PM'] }
-    ],
-    Orthopedics: [
-      { name: 'Dr. Rahul Verma', times: ['8:00 AM', '12:00 PM'] },
-      { name: 'Dr. Sneha Das', times: ['1:30 PM', '5:00 PM'] }
-    ]
-  };
-
+  departments: string[] = [];
+  doctors: { id: number; name: string }[] = [];
   availableTimes: string[] = [];
 
-submitForm() {
-  console.log('Appointment booked:', this.form);
-  alert(`Appointment booked successfully for ${this.form.doctor} on ${this.form.date} at ${this.form.time}`);
-  
-  // You can reset the form here if needed
-  this.form = {
-    department: '',
-    doctor: '',
-    date: '',
-    time: ''
-  };
-  this.availableTimes = [];
-}
+  constructor(private patientService: PatientService) {
+    this.fetchDepartments();
+  }
 
+  fetchDepartments() {
+    this.patientService.getDepartments().subscribe({
+      next: (data) => {
+        this.departments = data;
+      },
+      error: (err) => {
+        console.error('Error fetching departments:', err);
+      }
+    });
+  }
+
+  onDepartmentChange() {
+    this.doctors = [];
+    this.availableTimes = [];
+    this.form.doctor = 0;
+    this.form.time = '';
+
+    if (this.form.department) {
+      this.patientService.getDoctorsByDepartment(this.form.department).subscribe({
+        next: (data) => {
+          this.doctors = data;
+        },
+        error: (err) => {
+          console.error('Error fetching doctors:', err);
+        }
+      });
+    }
+  }
 
   onDoctorChange() {
-    const doctorList = this.availableDoctors[this.form.department];
-    const selected = doctorList?.find(d => d.name === this.form.doctor);
-    this.availableTimes = selected ? selected.times : [];
+    this.availableTimes = [];
+    this.form.time = '';
+
+    if (this.form.doctor && this.form.date) {
+      this.fetchAvailableTimes();
+    }
+  }
+
+  onDateChange() {
+    if (this.form.doctor && this.form.date) {
+      this.fetchAvailableTimes();
+    }
+  }
+
+  fetchAvailableTimes() {
+    this.patientService.getAvailableTimes(this.form.doctor, this.form.date).subscribe({
+      next: (data) => {
+        this.availableTimes = data;
+      },
+      error: (err) => {
+        console.error('Error fetching time slots:', err);
+      }
+    });
+  }
+
+  submitForm() {
+    if (this.form.department && this.form.doctor && this.form.date && this.form.time) {
+      const appointmentData = {
+        patientId: 1,  // fixed patient ID
+        department: this.form.department,
+        doctorId: this.form.doctor,
+        date: this.form.date,
+        time: this.form.time
+      };
+
+      this.patientService.bookAppointment(appointmentData).subscribe({
+        next: (response) => {
+          console.log('Appointment booked:', response);
+          const doctorName = this.doctors.find(d => d.id === this.form.doctor)?.name || 'selected doctor';
+          alert(`Appointment booked successfully for ${doctorName} on ${this.form.date} at ${this.form.time}`);
+          this.resetForm();
+        },
+        error: (err) => {
+          console.error('Error booking appointment:', err);
+          alert('There was an error booking your appointment. Please try again.');
+        }
+      });
+    } else {
+      alert('Please fill all the fields.');
+    }
+  }
+
+  resetForm() {
+    this.form = {
+      department: '',
+      doctor: 0,
+      date: '',
+      time: ''
+    };
+    this.doctors = [];
+    this.availableTimes = [];
   }
 }
-
-

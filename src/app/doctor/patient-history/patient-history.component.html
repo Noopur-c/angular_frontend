@@ -1,41 +1,68 @@
-<div class="container mt-4">
-  <h2 class="mb-3">Patient History</h2>
+<div class="container">
+  <h2>Patient Treatment History</h2>
 
-  <div class="input-group mb-3">
-    <input
-      type="text"
-      class="form-control"
-      [(ngModel)]="patientName"
-      placeholder="Enter patient name"
-    />
-    <button class="btn btn-primary" (click)="fetchHistory()">Search</button>
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
   </div>
 
-  <div *ngIf="showHistory && selectedPatient; else notFound">
-    <div class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h4 class="card-title">{{ selectedPatient.name }}</h4>
-        <p class="card-text"><strong>Age:</strong> {{ selectedPatient.age }}</p>
-        <p class="card-text"><strong>Occupation:</strong> {{ selectedPatient.occupation }}</p>
-      </div>
-    </div>
+  <table *ngIf="patientHistory.length" class="treatment-table">
+    <thead>
+      <tr>
+        <th>Patient ID</th>
+        <th>Patient Name</th>
+        <th>Diagnosis</th>
+        <th>Treatment Details</th>
+        <th>Prescription</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let treatment of patientHistory">
+        <td>{{ treatment.patientId }}</td>
+        <td>{{ treatment.Appointment?.Patient?.name || 'N/A' }}</td>
+        <td>{{ treatment.diagnosis }}</td>
+        <td>{{ treatment.treatmentDetails }}</td>
+        <td>{{ treatment.prescription }}</td>
+        <td>{{ treatment.date | date: 'shortDate' }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <h5 class="mt-4">Consultation History</h5>
-    <div *ngFor="let entry of selectedPatient.consultations" class="card mb-2 shadow-sm">
-      <div class="card-body">
-        <p class="mb-1"><strong>Date:</strong> {{ entry.date }}</p>
-        <p class="mb-1"><strong>Diagnosis:</strong> {{ entry.diagnosis }}</p>
-        <p class="mb-1"><strong>Prescription:</strong> {{ entry.prescription }}</p>
-        <p class="mb-0"><strong>Doctor:</strong> {{ entry.doctor }}</p>
-      </div>
-    </div>
-  </div>
-
-  <ng-template #notFound>
-    <div *ngIf="showHistory" class="alert alert-warning">
-      No records found for "{{ patientName }}"
-    </div>
-  </ng-template>
+  <p *ngIf="!patientHistory.length && !errorMessage">No treatments found.</p>
 </div>
+
+
+
+<!--<div class="patient-history">
+  <h2>Patient History</h2>
+
+  <div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <table *ngIf="patientHistory.length > 0">
+    <thead>
+      <tr>
+        <th>Appointment Date</th>
+        <th>Treatment Details</th>
+        <th>Diagnosis</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of patientHistory">
+        <td>{{ record.appointmentDate | date }}</td>
+        <td>{{ record.treatmentDetails }}</td>
+        <td>{{ record.diagnosis }}</td>
+        <td>{{ record.notes }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="patientHistory.length === 0" class="no-history">
+    <p>No patient history available.</p>
+  </div>
+</div>-->
+
 
   

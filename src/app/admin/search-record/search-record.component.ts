@@ -1,36 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
-  selector: 'app-search-record',
+  selector: 'app-search-records',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './search-record.component.html',
+  styleUrls: ['./search-record.component.css'],
 })
-export class SearchRecordComponent {
-  searchTerm = '';
-  searchType = 'patient';
-  results: any[] = [];
-  showResults = false;
+export class SearchRecordsComponent implements OnInit {
+  query: string = '';
+  doctors: any[] = [];
+  patients: any[] = [];
+  staff: any[] = [];
+  loading: boolean = false;
+  hasSearched: boolean = false;
 
-  mockPatients = [
-    { id: 'P001', name: 'Patient 1', age: 30, email: 'aaaPatient1@example.com' },
-    { id: 'P002', name: 'Patient 2', age: 25, email: 'bbbPatent2@example.com' }
-  ];
+  constructor(private adminService: AdminService) {}
 
-  mockDoctors = [
-    { id: 'D001', name: 'Dr. Doctor 1', specialization: 'Cardiology' },
-    { id: 'D002', name: 'Dr. Doctor 2', specialization: 'Neurology' }
-  ];
+  ngOnInit(): void {}
 
-  search() {
-    const term = this.searchTerm.toLowerCase();
-    const data = this.searchType === 'patient' ? this.mockPatients : this.mockDoctors;
-    this.results = data.filter(item =>
-      item.name.toLowerCase().includes(term) || item.id.toLowerCase().includes(term)
-    );
-    this.showResults = true;
+  onSearch(): void {
+    const trimmedQuery = this.query.trim();
+    if (!trimmedQuery) return;
+
+    this.loading = true;
+    this.hasSearched = true;
+
+    this.adminService.searchRecords(trimmedQuery).subscribe({
+      next: (response) => {
+        console.log('Search response:', response);
+        this.doctors = response?.doctors || [];
+        this.patients = response?.patients || [];
+        this.staff = response?.staff || [];
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error searching records', err);
+        this.doctors = [];
+        this.patients = [];
+        this.staff = [];
+        this.loading = false;
+      }
+    });
   }
 }
-

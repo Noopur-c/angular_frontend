@@ -1,59 +1,25 @@
-<div class="container mt-5">
-  <h2 class="mb-4">Generate Bill</h2>
+<div class="generate-bill-container">
+  <div class="generate-bill-form">
+    <h2>Generate Bill</h2>
 
-  <!-- Patient Name Input -->
-  <div class="mb-3">
-    <label for="patientName" class="form-label">Patient Name</label>
-    <input 
-      type="text" 
-      class="form-control" 
-      id="patientName" 
-      [(ngModel)]="patientName" 
-      (ngModelChange)="fetchPatientDetails()" 
-      placeholder="Enter patient's name" />
+    <label for="appointment">Appointment:</label>
+    <select id="appointment" [(ngModel)]="selectedAppointmentId">
+      <option [ngValue]="null" disabled>Select an appointment</option>
+      <option *ngFor="let appt of appointments" [value]="appt.id">
+        {{ getPatientName(appt.patientId) }} - {{ appt.date | date:'short' }}
+      </option>
+    </select>
+
+    <label for="amount">Amount:</label>
+    <input id="amount" type="number" [(ngModel)]="amount" />
+
+    <label for="notes">Notes:</label>
+    <textarea id="notes" [(ngModel)]="notes"></textarea>
+
+    <button (click)="submitBill()">Generate Bill</button>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
   </div>
-
-  <!-- Patient Details (only shows if details are found) -->
-  <div *ngIf="patientDetails" class="card mt-4">
-    <div class="card-body">
-      <h5 class="card-title">Patient Details</h5>
-      <p><strong>Current Diagnosis:</strong> {{ patientDetails.currentDiagnosis }}</p>
-      <p><strong>Current Prescription:</strong> {{ patientDetails.currentPrescription }}</p>
-
-      <h6>Previous Prescriptions</h6>
-      <ul>
-        <li *ngFor="let prescription of patientDetails.previousPrescriptions">
-          <strong>{{ prescription.date }}:</strong> {{ prescription.diagnosis }} - {{ prescription.prescription }}
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Bill Amount Input -->
-  <div class="mb-3">
-    <label for="billAmount" class="form-label">Bill Amount (₹)</label>
-    <input 
-      type="number" 
-      class="form-control" 
-      id="billAmount" 
-      [(ngModel)]="billAmount" 
-      placeholder="Enter the bill amount" />
-  </div>
-
-  <!-- Remarks Input -->
-  <div class="mb-3">
-    <label for="remarks" class="form-label">Remarks</label>
-    <textarea 
-      class="form-control" 
-      id="remarks" 
-      rows="3" 
-      [(ngModel)]="remarks" 
-      placeholder="Enter remarks"></textarea>
-  </div>
-
-  <!-- Submit Button -->
-  <button 
-    class="btn btn-primary" 
-    (click)="submitBill()">Generate Bill</button>
 </div>
 

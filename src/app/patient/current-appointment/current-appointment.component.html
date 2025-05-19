@@ -1,26 +1,36 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">📅 Current Appointment 📅</h2>
-  
-    <div class="card shadow mx-auto" style="max-width: 600px;">
-      <div class="card-body">
-        <h5 class="card-title">Doctor: {{ currentAppointment.doctorName }}</h5>
-        <p class="card-text"><strong>Department:</strong> {{ currentAppointment.department }}</p>
-        <p class="card-text"><strong>Date:</strong> {{ currentAppointment.date }}</p>
-        <p class="card-text"><strong>Time:</strong> {{ currentAppointment.time }}</p>
-  
-        <p class="card-text">
-          <strong>Status:</strong>
-          <span
-            class="badge"
-            [ngClass]="{
-              'bg-success': currentAppointment.status === 'approved',
-              'bg-warning text-dark': currentAppointment.status === 'pending'
-            }"
-          >
-            {{ currentAppointment.status | titlecase }}
-          </span>
-        </p>
-      </div>
-    </div>
+<div class="appointment-container">
+  <h2>Enter Your Name</h2>
+
+  <input [(ngModel)]="patientName" placeholder="Enter patient name" />
+  <button (click)="fetchAppointmentsByName()">Search</button>
+
+  <p *ngIf="loading">Loading appointments...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <div *ngIf="appointments.length > 0">
+    <h3>Appointments:</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Doctor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments">
+          <td>{{ appointment.date }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.status }}</td>
+          <td>{{ appointment.Doctor?.name }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+
+
+
+
   

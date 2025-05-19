@@ -1,33 +1,58 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">⭐ Appointment Feedback</h2>
-  
-    <div *ngFor="let appt of completedAppointments" class="card mb-4 shadow-sm p-3">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <h5>{{ appt.doctor }}</h5>
-          <p class="mb-1"><strong>Date:</strong> {{ appt.date }}</p>
-        </div>
-        <span *ngIf="appt.feedbackGiven" class="badge bg-success">Submitted</span>
-      </div>
-  
-      <div *ngIf="!appt.feedbackGiven">
-        <!-- Rating -->
-        <label class="form-label mt-2">Rating:</label>
-        <select class="form-select mb-2" [(ngModel)]="appt.rating">
-          <option value="0" disabled selected>Select rating</option>
-          <option *ngFor="let star of [1,2,3,4,5]" [value]="star">{{ star }} Star</option>
-        </select>
-  
-        <!-- Comment -->
-        <label class="form-label">Comment (optional):</label>
-        <textarea class="form-control mb-3" [(ngModel)]="appt.comment" rows="2"></textarea>
-  
-        <button class="btn btn-primary" (click)="submitFeedback(appt)">Submit Feedback</button>
-      </div>
-    </div>
-  
-    <div *ngIf="completedAppointments.length === 0" class="text-center text-muted">
-      No completed appointments available for feedback.
-    </div>
+<div class="container">
+  <h2>Submit Feedback</h2>
+
+  <div class="form-group">
+    <label for="patientName">Patient Name:</label>
+    <input
+      id="patientName"
+      type="text"
+      [(ngModel)]="patientName"
+      placeholder="Enter patient name"
+    />
+    <button (click)="fetchAppointmentsByPatientName()" class="btn">
+      Fetch Appointments
+    </button>
   </div>
-  
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+  <div *ngIf="appointments.length > 0" class="form-group">
+    <label for="appointmentSelect">Select Appointment:</label>
+    <select
+      id="appointmentSelect"
+      [(ngModel)]="selectedAppointmentId"
+      required
+    >
+      <option [value]="null" disabled>Select an appointment</option>
+      <option *ngFor="let appointment of appointments" [value]="appointment.appointmentId">
+        {{ appointment.appointmentDate | date:'mediumDate' }} with Dr. {{ appointment.doctorName }}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="appointments.length > 0" class="form-group">
+    <label for="feedback">Feedback:</label>
+    <textarea
+      id="feedback"
+      [(ngModel)]="feedback"
+      placeholder="Write your feedback here"
+      rows="4"
+    ></textarea>
+  </div>
+
+  <div *ngIf="appointments.length > 0" class="form-group rating-group">
+    <label>Rating:</label>
+    <select [(ngModel)]="rating">
+      <option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }}</option>
+    </select>
+  </div>
+
+  <button
+    *ngIf="appointments.length > 0"
+    (click)="submitFeedback()"
+    class="submit-btn"
+  >
+    Submit Feedback
+  </button>
+</div>

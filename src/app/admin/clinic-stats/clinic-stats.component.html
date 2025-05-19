@@ -1,10 +1,43 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">📊 Clinic Statistics</h2>
-    <div class="card shadow p-4">
-      <p><strong>Total Patients:</strong> 1,250</p>
-      <p><strong>Total Doctors:</strong> 25</p>
-      <p><strong>Appointments Today:</strong> 112</p>
-      <p><strong>Feedbacks Received:</strong> 432</p>
-    </div>
+<div class="stats-container" *ngIf="!loading; else loadingTemplate">
+  <h2>Clinic Statistics</h2>
+  
+  <div class="stats-card">
+    <h3>Total Appointments</h3>
+    <p>{{ stats.weeklyAppointments }}</p>
   </div>
+  
+  <div class="stats-card">
+    <h3>Total Income</h3>
+    <p>{{ stats.income | currency }}</p>
+  </div>
+  
+  <div class="stats-card">
+    <h3>Total Patients</h3>
+    <p>{{ stats.patientCount }}</p>
+  </div>
+  
+  <div class="stats-card">
+    <h3>Total Doctors</h3>
+    <p>{{ stats.doctorCount }}</p>
+  </div>
+  
+  <div class="stats-card">
+    <h3>Departments</h3>
+    <ul>
+      <li *ngFor="let department of stats.departments">{{ department.name }}</li>
+    </ul>
+  </div>
+  
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <p>Loading stats...</p>
+  </div>
+</ng-template>
+
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>
+
   

@@ -1,14 +1,45 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">🩺 Treatment History</h2>
-  
-    <div *ngFor="let item of treatments" class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">{{ item.date }} — {{ item.doctor }}</h5>
-        <p class="card-text"><strong>Department:</strong> {{ item.department }}</p>
-        <p class="card-text"><strong>Diagnosis:</strong> {{ item.diagnosis }}</p>
-        <p class="card-text"><strong>Prescription:</strong> {{ item.prescription }}</p>
-        <p class="card-text"><strong>Doctor's Notes:</strong> {{ item.notes }}</p>
-      </div>
-    </div>
+<div class="container">
+  <h2 class="title">Treatment History</h2>
+
+  <div class="search-box">
+    <label for="patientName">Enter Patient Name:</label>
+    <input
+      type="text"
+      id="patientName"
+      [(ngModel)]="patientName"
+      placeholder="e.g., John Doe"
+    />
+    <button (click)="fetchTreatmentHistory()">Search</button>
   </div>
-  
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <table *ngIf="treatments.length > 0" class="treatment-table">
+    <thead>
+      <tr>
+        <th>Treatment ID</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Diagnosis</th>
+        <th>Treatment</th>
+        <th>Prescription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let treatment of treatments">
+        <td>{{ treatment.id }}</td>
+        <td>{{ treatment.Appointment?.Doctor?.name || 'N/A' }}</td>
+        <td>{{ treatment.date | date: 'shortDate' }}</td>
+        <td>{{ treatment.diagnosis }}</td>
+        <td>{{ treatment.treatmentDetails }}</td>
+        <td>{{ treatment.prescription }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="searched && treatments.length === 0 && !error" class="no-results">
+    <p>No treatments found for this patient.</p>
+  </div>
+</div>

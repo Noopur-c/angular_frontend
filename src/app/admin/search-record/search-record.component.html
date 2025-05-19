@@ -1,34 +1,57 @@
-<div class="container mt-4">
-    <h2 class="mb-4">🔍 Search Records</h2>
-  
-    <div class="mb-3">
-      <label class="form-label">Search by</label>
-      <select [(ngModel)]="searchType" class="form-select">
-        <option value="patient">Patient</option>
-        <option value="doctor">Doctor</option>
-      </select>
+<div class="search-container">
+  <h2>Search Records</h2>
+
+  <div class="search-input">
+    <input
+      type="text"
+      [(ngModel)]="query"
+      placeholder="Search by name..."
+    />
+    <button (click)="onSearch()">Search</button>
+  </div>
+
+  <div class="results-section" *ngIf="query.trim()">
+    <!-- Doctors -->
+    <div *ngIf="doctors?.length">
+      <h3>Doctors</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+            <th>Specialization</th><th>Experience</th><th>Salary</th><th>Department</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doc of doctors">
+            <td>{{ doc.id }}</td><td>{{ doc.name }}</td><td>{{ doc.email }}</td><td>{{ doc.phone }}</td>
+            <td>{{ doc.specialization }}</td><td>{{ doc.experience }}</td><td>{{ doc.salary }}</td><td>{{ doc.departmentId }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  
-    <div class="mb-3">
-      <input [(ngModel)]="searchTerm" class="form-control" placeholder="Enter name or ID" />
+
+    <!-- Patients -->
+    <div *ngIf="patients?.length">
+      <h3>Patients</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+            <th>Date of Birth</th><th>Gender</th><th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of patients">
+            <td>{{ patient.id }}</td><td>{{ patient.name }}</td><td>{{ patient.email }}</td><td>{{ patient.phone }}</td>
+            <td>{{ patient.dob }}</td><td>{{ patient.gender }}</td><td>{{ patient.address }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  
-    <button class="btn btn-primary mb-4" (click)="search()">Search</button>
-  
-    <div *ngIf="showResults">
-      <h5>Results:</h5>
-      <div *ngIf="results.length > 0; else noResult">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let result of results">
-            <strong>{{ result.name }}</strong> (ID: {{ result.id }})
-            <div *ngIf="searchType === 'patient'">Age: {{ result.age }}, Email: {{ result.email }}</div>
-            <div *ngIf="searchType === 'doctor'">Specialization: {{ result.specialization }}</div>
-          </li>
-        </ul>
-      </div>
-      <ng-template #noResult>
-        <p class="text-danger">No matching records found.</p>
-      </ng-template>
+
+    <!-- No results -->
+    <div *ngIf="!doctors?.length && !patients?.length">
+      <p>No results found.</p>
     </div>
   </div>
-  
+</div>

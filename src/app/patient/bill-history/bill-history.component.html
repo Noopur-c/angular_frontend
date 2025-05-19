@@ -1,18 +1,42 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">🧾 Bill History</h2>
-  
-    <div *ngFor="let bill of bills" class="card mb-3 shadow-sm">
-      <div class="card-body">
-        <h5 class="card-title">Appointment #{{ bill.appointmentId }}</h5>
-        <p class="card-text mb-1"><strong>Doctor:</strong> {{ bill.doctor }}</p>
-        <p class="card-text mb-1"><strong>Date:</strong> {{ bill.date }}</p>
-        <p class="card-text mb-1"><strong>Amount:</strong> ₹{{ bill.amount }}</p>
-        <span class="badge bg-success">{{ bill.status }}</span>
-      </div>
-    </div>
-  
-    <div *ngIf="bills.length === 0" class="text-center text-muted">
-      No bills to show.
-    </div>
-  </div>
-  
+<div class="bill-history-container">
+  <h2>Search Bills by Patient Name</h2>
+
+  <input [(ngModel)]="patientName" placeholder="Enter patient name" />
+  <button (click)="fetchBillHistoryByPatientName()">Search</button>
+
+  <p *ngIf="loading">Loading data...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <table *ngIf="billsToDisplay.length > 0" class="bills-table">
+    <thead>
+      <tr>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
+        <th>Doctor</th>
+        <th>Bill Amount</th>
+        <th>Bill Status</th>
+        <th>Bill Generated Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bill of billsToDisplay">
+        <td>{{ bill.appointmentDate | date: 'mediumDate' }}</td>
+        <td>{{ bill.appointmentTime }}</td>
+        <td>{{ bill.doctorName }}</td>
+        <td>{{ bill.amount | currency }}</td>
+        <td>{{ bill.status }}</td>
+        <td>
+          <span *ngIf="bill.generatedDate; else noDate">
+            {{ bill.generatedDate | date: 'mediumDate' }}
+          </span>
+          <ng-template #noDate>-</ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !error && billsToDisplay.length === 0">
+    No bills found for this patient.
+  </p>
+</div>
+

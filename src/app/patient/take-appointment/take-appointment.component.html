@@ -1,76 +1,72 @@
-<div class="container mt-4">
-  <h2 class="mb-4">Take Appointment</h2>
+<div class="appointment-form">
+  <h2>Book an Appointment</h2>
 
-  <form #appointmentForm="ngForm" (ngSubmit)="submitForm()" novalidate>
-    <!-- Department -->
-    <div class="mb-3">
-      <label for="department" class="form-label">Department</label>
+  <form (ngSubmit)="submitForm()" #appointmentForm="ngForm">
+    <!-- Department Selection -->
+    <div>
+      <label for="department">Select Department:</label>
       <select
         id="department"
-        class="form-select"
+        [(ngModel)]="form.department"
         name="department"
         required
-        [(ngModel)]="form.department"
-        (change)="form.doctor = ''; availableTimes = []"
+        (change)="onDepartmentChange()"
       >
-        <option value="" disabled selected>Select a department</option>
-        <option *ngFor="let dept of Object.keys(availableDoctors)" [value]="dept">
+        <option value="" disabled>Select a department</option>
+        <option *ngFor="let dept of departments" [value]="dept">
           {{ dept }}
         </option>
       </select>
     </div>
 
-    <!-- Doctor -->
-    <div class="mb-3" *ngIf="form.department">
-      <label for="doctor" class="form-label">Doctor</label>
+    <!-- Doctor Selection -->
+    <div *ngIf="doctors.length">
+      <label for="doctor">Select Doctor:</label>
       <select
         id="doctor"
-        class="form-select"
+        [(ngModel)]="form.doctor"
         name="doctor"
         required
-        [(ngModel)]="form.doctor"
         (change)="onDoctorChange()"
       >
-        <option value="" disabled selected>Select a doctor</option>
-        <option *ngFor="let doc of availableDoctors[form.department]" [value]="doc.name">
-          {{ doc.name }}
-        </option>
+        <option value="" disabled>Select a doctor</option>
+        <option *ngFor="let doc of doctors" [value]="doc.id">{{ doc.name }}</option>
+
       </select>
     </div>
 
-    <!-- Date -->
-    <div class="mb-3">
-      <label for="date" class="form-label">Date</label>
+    <!-- Date Picker -->
+    <div *ngIf="form.doctor">
+      <label for="date">Select Date:</label>
       <input
-        type="date"
         id="date"
-        name="date"
-        class="form-control"
+        type="date"
         [(ngModel)]="form.date"
+        name="date"
         required
+        (change)="onDateChange()"
       />
     </div>
 
-    <!-- Time -->
-    <div class="mb-3" *ngIf="availableTimes.length > 0">
-      <label for="time" class="form-label">Available Time</label>
-      <select
-        id="time"
-        class="form-select"
-        name="time"
-        required
-        [(ngModel)]="form.time"
-      >
-        <option value="" disabled selected>Select a time</option>
-        <option *ngFor="let time of availableTimes" [value]="time">
-          {{ time }}
-        </option>
-      </select>
-    </div>
+    <!-- Time Slots -->
+    <div *ngIf="availableTimes.length">
+  <label for="time">Select Time:</label>
+  <select
+    id="time"
+    [(ngModel)]="form.time"
+    name="time"
+    required
+  >
+    <option value="" disabled>Select a time slot</option>
+    <option *ngFor="let time of availableTimes" [value]="time">
+      {{ time }}
+    </option>
+  </select>
+</div>
 
-    <!-- Submit -->
-    <button type="submit" class="btn btn-primary" [disabled]="!appointmentForm.form.valid">
-      Book Appointment
-    </button>
+    <!-- Submit Button -->
+    <div class="submit-btn">
+      <button type="submit">Book Appointment</button>
+    </div>
   </form>
 </div>

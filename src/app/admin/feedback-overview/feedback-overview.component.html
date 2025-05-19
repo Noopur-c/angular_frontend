@@ -1,16 +1,30 @@
-<div class="container mt-4">
-    <h2 class="mb-4">⭐ Patient Feedback Overview</h2>
-  
-    <div class="card mb-3" *ngFor="let feedback of feedbackList">
-      <div class="card-body">
-        <h5 class="card-title">{{ feedback.patient }}</h5>
-        <p class="card-text">
-          <strong>Rating:</strong>
-          <span *ngFor="let star of [].constructor(feedback.rating)">⭐</span>
-        </p>
-        <p class="card-text"><strong>Comments:</strong> {{ feedback.comments }}</p>
-        <small class="text-muted">Date: {{ feedback.date }}</small>
-      </div>
-    </div>
+<div class="feedback-container">
+  <h2>Feedback from Patients</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
-  
+
+  <div *ngIf="feedbackList.length === 0" class="alert alert-info">
+    No feedback available.
+  </div>
+
+  <table *ngIf="feedbackList.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Appointment ID</th>
+        <th>Message</th>
+        <th>Rating</th>
+        <th>Submitted At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbackList">
+        <td>{{ feedback.appointmentId }}</td>
+        <td>{{ feedback.message }}</td>
+        <td>{{ feedback.rating }}</td>
+        <td>{{ feedback.createdAt | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -19,16 +19,25 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Joining Date</th>
-          <th>Last Consultation</th><th>Payment</th><th>Occupation</th><th>Actions</th>
+          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users.Patient; let i = index">
-          <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
-          <td>{{ user.joiningDate }}</td><td>{{ user.lastConsultation }}</td><td>{{ user.paymentStatus }}</td>
-          <td>{{ user.occupation }}</td>
-          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Patient', i)">Delete</button></td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ calculateAge(user.dob) }}</td>
+          <td>{{ user.gender }}</td>
+          <td>{{ user.address }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser('Patient', user.id.toString(), i)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -40,23 +49,35 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Age</th><th>Joining Date</th>
-          <th>Experience</th><th>Salary</th><th>Department</th><th>Role</th><th>Actions</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Experience</th>
+          <th>Salary</th>
+          <th>Specialization</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users.Doctor; let i = index">
-          <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
-          <td>{{ user.joiningDate }}</td><td>{{ user.experience }}</td><td>{{ user.salary }}</td><td>{{ user.department }}</td>
-          <td>{{ user.role }}</td>
-          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Doctor', i)">Delete</button></td>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.experience }}</td>
+          <td>{{ user.salary }}</td>
+          <td>{{ user.specialization }}</td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser('Doctor', user.id.toString(), i)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 
   <!-- Show Staff Table -->
-  <div *ngIf="selectedRole === 'All' || selectedRole === 'Staff'">
+  <div *ngIf="selectedRole === 'All' || selectedRole === 'Staff'" class="mb-5">
     <h5>Staff</h5>
     <table class="table table-bordered table-striped">
       <thead>
@@ -70,7 +91,9 @@
           <td>{{ user.id }}</td><td>{{ user.name }}</td><td>{{ user.email }}</td><td>{{ user.phone }}</td><td>{{ user.age }}</td>
           <td>{{ user.joiningDate }}</td><td>{{ user.experience }}</td><td>{{ user.salary }}</td><td>{{ user.occupation }}</td>
           <td>{{ user.role }}</td>
-          <td><button class="btn btn-sm btn-danger" (click)="deleteUser('Staff', i)">Delete</button></td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteUser('Staff', user.id.toString(), i)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

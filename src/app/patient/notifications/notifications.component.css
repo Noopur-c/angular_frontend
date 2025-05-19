@@ -1,0 +1,100 @@
+.notifications-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+.notifications-container h2 {
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.notification-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.notification-form input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.notification-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.notification-form button {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.notification-form button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #d9534f;
+  margin-bottom: 1rem;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.notification-item {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.notification-item p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.notification-item strong {
+  color: #007bff;
+}
+
+.notification-item em {
+  font-style: normal;
+  font-weight: 600;
+  color: #555;
+}
+
+.created-at {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.no-notifications,
+.prompt-message {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 1rem;
+}

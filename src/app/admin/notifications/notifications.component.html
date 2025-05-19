@@ -1,12 +1,19 @@
-<div class="container mt-4">
-    <h2 class="mb-4">🔔 System Notifications</h2>
-  
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let note of notifications">
-        <h5>{{ note.type }}</h5>
-        <p>{{ note.message }}</p>
-        <small class="text-muted">{{ note.time }}</small>
-      </li>
-    </ul>
+<div class="notifications-container">
+  <h2>Notifications</h2>
+
+  <div *ngIf="notifications.length > 0; else noNotifications">
+    <div class="notification-card" *ngFor="let notification of notifications">
+      <div class="notification-header">
+        <span class="notification-type">{{ notification.type }}</span>
+        <span class="notification-time">{{ notification.time }}</span>
+      </div>
+      <div class="notification-message">
+        {{ notification.message }}
+      </div>
+    </div>
   </div>
-  
+
+  <ng-template #noNotifications>
+    <p class="no-notifications">No new notifications.</p>
+  </ng-template>
+</div>

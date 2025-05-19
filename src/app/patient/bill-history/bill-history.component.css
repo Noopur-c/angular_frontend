@@ -1,0 +1,67 @@
+.bill-history-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.bill-history-container h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.bill-history-container input {
+  padding: 0.5rem;
+  width: 60%;
+  max-width: 400px;
+  margin-right: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.bill-history-container button {
+  padding: 0.55rem 1.2rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bill-history-container button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #d9534f;
+  margin-top: 1rem;
+}
+
+.bills-table {
+  margin: 1.5rem auto 0;
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.bills-table th, .bills-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.bills-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.bills-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

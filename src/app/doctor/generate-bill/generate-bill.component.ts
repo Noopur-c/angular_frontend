@@ -1,65 +1,85 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Prescription {
-  date: string;
-  diagnosis: string;
-  prescription: string;
-}
-
-interface PatientDetails {
-  currentDiagnosis: string;
-  currentPrescription: string;
-  previousPrescriptions: Prescription[];
-}
+import { HttpClientModule } from '@angular/common/http';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-generate-bill',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './generate-bill.component.html',
+  styleUrls: ['./generate-bill.component.css']
 })
-export class GenerateBillComponent {
-  patientName: string = '';
-  patientDetails: PatientDetails | null = null;
-  billAmount: number = 0;
-  remarks: string = '';
+export class GenerateBillComponent implements OnInit {
+  appointments: any[] = [];
+  patients: any[] = [];
+  selectedAppointmentId: number | null = null;
+  amount: number = 0;
+  notes: string = '';
+  successMessage = '';
+  errorMessage = '';
 
-  // Mock data for patients
-  patients: { [key: string]: PatientDetails } = {
-    'AAA BBB': {
-      currentDiagnosis: 'Hypertension',
-      currentPrescription: 'Amlodipine 5mg',
-      previousPrescriptions: [
-        { date: '2024-12-15', diagnosis: 'Migraine', prescription: 'Sumatriptan' },
-      ],
-    },
-    'Jane Smith': {
-      currentDiagnosis: 'Diabetes',
-      currentPrescription: 'Metformin 500mg',
-      previousPrescriptions: [
-        { date: '2024-10-10', diagnosis: 'Flu', prescription: 'Oseltamivir' },
-      ],
-    },
-  };
+  constructor(private doctorService: DoctorService) {}
 
-  // Function to fetch patient details based on name
-  fetchPatientDetails() {
-    this.patientDetails = this.patients[this.patientName] || null;
+  ngOnInit() {
+    this.loadPatients();
+    this.loadAppointments();
   }
 
-  // Function to submit the bill
+  loadPatients() {
+    this.doctorService.getAllPatients().subscribe({
+      next: (data) => {
+        this.patients = data;
+      },
+      error: (err) => {
+        console.error('Failed to load patients', err);
+      }
+    });
+  }
+
+  loadAppointments() {
+    this.doctorService.getTheAppointments().subscribe({
+      next: (data) => {
+        this.appointments = data;
+      },
+      error: (err) => {
+        console.error('Failed to load appointments', err);
+      }
+    });
+  }
+
+  // Helper to get patient name by patientId
+  getPatientName(patientId: number) {
+    const patient = this.patients.find(p => p.id === patientId);
+    return patient ? patient.name : 'Unknown';
+  }
+
   submitBill() {
-    if (this.patientDetails && this.billAmount > 0) {
-      // Generate bill logic (store or send to the backend)
-      console.log('Bill Generated:', {
-        patientName: this.patientName,
-        amount: this.billAmount,
-        remarks: this.remarks,
-      });
-    } else {
-      alert('Please provide valid details and amount.');
+    if (!this.selectedAppointmentId || !this.amount) {
+      this.errorMessage = 'Appointment and amount are required.';
+      return;
     }
+
+    const billDetails = {
+      amount: this.amount,
+      notes: this.notes
+    };
+
+    this.doctorService.generateBill(this.selectedAppointmentId, billDetails).subscribe({
+      next: () => {
+        this.successMessage = 'Bill generated successfully!';
+        this.errorMessage = '';
+        // Reset form
+        this.selectedAppointmentId = null;
+        this.amount = 0;
+        this.notes = '';
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Failed to generate bill.';
+        this.successMessage = '';
+      }
+    });
   }
 }
