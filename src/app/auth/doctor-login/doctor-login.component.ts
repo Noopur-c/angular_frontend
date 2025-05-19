@@ -25,7 +25,6 @@ export class DoctorLoginComponent {
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
-
   login(): void {
     this.authService.loginDoctor({ email: this.email, password: this.password }).subscribe({
       next: (res) => {
