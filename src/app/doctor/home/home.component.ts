@@ -19,4 +19,3 @@ export class DoctorHomeComponent {
     experience: '10 years'
   };
 }
-

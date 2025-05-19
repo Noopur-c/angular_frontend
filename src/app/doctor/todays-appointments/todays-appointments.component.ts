@@ -32,10 +32,6 @@ export class TodaysAppointmentsComponent implements OnInit {
   constructor(private doctorService: DoctorService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Uncomment if you want to get doctorId dynamically from the URL
-    // const idParam = this.route.snapshot.paramMap.get('doctorId');
-    // if (idParam) this.doctorId = Number(idParam);
-
     this.doctorService.getTodaysAppointments(this.doctorId).subscribe({
       next: (data: Appointment[]) => {
         this.appointments = data;

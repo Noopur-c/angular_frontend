@@ -30,39 +30,3 @@
 
   <p *ngIf="!patientHistory.length && !errorMessage">No treatments found.</p>
 </div>
-
-
-
-<!--<div class="patient-history">
-  <h2>Patient History</h2>
-
-  <div *ngIf="errorMessage" class="error">
-    <p>{{ errorMessage }}</p>
-  </div>
-
-  <table *ngIf="patientHistory.length > 0">
-    <thead>
-      <tr>
-        <th>Appointment Date</th>
-        <th>Treatment Details</th>
-        <th>Diagnosis</th>
-        <th>Notes</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let record of patientHistory">
-        <td>{{ record.appointmentDate | date }}</td>
-        <td>{{ record.treatmentDetails }}</td>
-        <td>{{ record.diagnosis }}</td>
-        <td>{{ record.notes }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div *ngIf="patientHistory.length === 0" class="no-history">
-    <p>No patient history available.</p>
-  </div>
-</div>-->
-
-
-  
