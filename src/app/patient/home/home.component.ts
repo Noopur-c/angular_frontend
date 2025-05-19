@@ -21,5 +21,3 @@ export class PatientHomeComponent {
     weight: '70 kg'
   };
 }
-
-
