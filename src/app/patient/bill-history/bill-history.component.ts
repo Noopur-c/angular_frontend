@@ -18,7 +18,7 @@ interface Appointment {
   time: string;
   status: string;
   Doctor?: { name: string };
-  bills: Bill[];
+  Bill?: Bill | null;  
 }
 
 interface BillDisplay {
@@ -46,7 +46,7 @@ export class BillHistoryComponent implements OnInit {
   constructor(private patientService: PatientService) {}
 
   ngOnInit(): void {
-    // Intentionally empty; user triggers fetch manually
+    // User triggers fetch manually
   }
 
   fetchBillHistoryByPatientName(): void {
@@ -69,19 +69,18 @@ export class BillHistoryComponent implements OnInit {
           return;
         }
 
-        // Flatten bills from all appointments
         appointments.forEach(appt => {
-          appt.bills.forEach(bill => {
-            this.billsToDisplay.push({
-              appointmentDate: appt.date,
-              appointmentTime: appt.time,
-              doctorName: appt.Doctor?.name || 'N/A',
-              amount: bill.amount,
-              status: bill.status,
-              generatedDate: bill.generatedDate,
-            });
-          });
-        });
+  if (appt.Bill) {
+    this.billsToDisplay.push({
+      appointmentDate: appt.date,
+      appointmentTime: appt.time,
+      doctorName: appt.Doctor?.name || 'N/A',
+      amount: appt.Bill.amount,
+      status: appt.Bill.status,
+      generatedDate: appt.Bill.generatedDate,
+    });
+  }
+});
 
         if (this.billsToDisplay.length === 0) {
           this.error = 'No bills found for this patient.';
